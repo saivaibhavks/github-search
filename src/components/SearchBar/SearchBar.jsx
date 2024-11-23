@@ -5,15 +5,38 @@ export default function SearchBar({ setUserData }) {
   const [username, setUsername] = useState("");
   const [error, setError] = useState(false);
 
+  async function fetchUserDetails(users) {
+    const detailedUsers = await Promise.all(
+      users.map(async (user) => {
+        try {
+          const userResponse = await fetch(user.url);
+          const userDetails = await userResponse.json();
+
+          return {
+            ...user,
+            followers: userDetails.followers,
+            following: userDetails.following,
+            public_repos: userDetails.public_repos,
+          };
+        } catch {
+          return user;
+        }
+      })
+    );
+
+    setUserData(detailedUsers);
+  }
+
   function fetchUserData(username) {
-    fetch(`https://api.github.com/search/users?q=s${username}`)
+    fetch(`https://api.github.com/search/users?q=${username}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.message === "Not Found") {
+        if (data.items.length === 0) {
           setError(true);
+          setUserData([]);
         } else {
           setError(false);
-          setUserData(data.items);
+          fetchUserDetails(data.items);
           setUsername("");
         }
       })
@@ -48,7 +71,7 @@ export default function SearchBar({ setUserData }) {
         value={username}
         onChange={handleChange}
       />
-      {error && <span className="error">Invalid userame</span>}
+      {error && <span className="error">No Records Found!</span>}
       <button className="search-btn">Search</button>
     </form>
   );

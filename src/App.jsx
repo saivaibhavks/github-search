@@ -5,26 +5,12 @@ import UserData from "./components/UserData/UserData";
 import "./App.css";
 
 export default function App() {
-  const isDarkMode = JSON.parse(localStorage.getItem("dark-mode"));
-  const [darkMode, setDarkMode] = useState(isDarkMode);
   const [userData, setUserData] = useState([]);
 
-  function toggleDarkMode() {
-    setDarkMode((prevDarkMode) => !prevDarkMode);
-  }
-
-  function saveReposData(repos) {
-    setUserRepos(repos);
-  }
-
-  useEffect(() => {
-    localStorage.setItem("dark-mode", darkMode);
-  }, [darkMode]);
-
   return (
-    <div className={`App ${darkMode ? "dark" : "light"}`}>
+    <div className={`App dark`}>
       <main className="container">
-        <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        <Header />
         <SearchBar setUserData={setUserData} />
         <UserData user={userData} />
       </main>
