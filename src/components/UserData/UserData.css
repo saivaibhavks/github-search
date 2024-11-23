@@ -3,40 +3,46 @@
   background-color: var(--app-bg);
   border-radius: 10px;
   padding: 16px;
-  font-size: 12px;
+  font-size: 16px;
   box-shadow: var(--box-shadow);
   margin-top: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 .user-row {
   display: flex;
   align-items: center;
-  gap: 20px;
-  flex-wrap: nowrap;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 .avatar {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .user-info-row {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex: 1;
 }
 
 .name {
   font-size: 16px;
   color: var(--text-color-two);
   margin: 0;
+  word-wrap: break-word;
 }
 
 .login {
   font-size: 14px;
   color: #0097ff;
   text-decoration: none;
+  word-wrap: break-word;
 }
 
 .bio {
@@ -44,6 +50,7 @@
   line-height: 16px;
   margin: 0;
   color: rgb(236, 206, 206);
+  word-wrap: break-word;
 }
 
 .stats-row {
@@ -52,6 +59,7 @@
   margin-left: auto;
   background-color: var(--body-bg);
   padding: 14px;
+  border-radius: 8px;
 }
 
 .stat {
@@ -62,123 +70,45 @@
 }
 
 .stat-title {
-  font-size: 10px;
-  font-weight: 400;
+  font-size: 12px;
+  font-weight: 500;
   margin: 0;
 }
 
 .stat-number {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   color: var(--text-color-two);
   margin: 0;
 }
 
 @media (min-width: 480px) {
-  .user-card {
-    padding: 18px;
-  }
-
-  .avatar {
-    width: 65px;
-    height: 65px;
-  }
-
-  .name {
-    font-size: 17px;
-  }
-
-  .login {
-    font-size: 15px;
-  }
-
-  .bio {
-    font-size: 13px;
-    color: rgb(236, 206, 206);
-  }
-
-  .stats-row {
-    gap: 25px;
-  }
-
   .stat-title {
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .stat-number {
-    font-size: 15px;
+    font-size: 18px;
   }
 }
 
 @media (min-width: 768px) {
-  .user-card {
-    padding: 20px;
-  }
-
-  .avatar {
-    width: 70px;
-    height: 70px;
-  }
-
-  .name {
-    font-size: 18px;
-  }
-
-  .login {
-    font-size: 16px;
-  }
-
-  .bio {
-    font-size: 14px;
-    color: rgb(236, 206, 206);
-  }
-
-  .stats-row {
-    gap: 30px;
-  }
-
   .stat-title {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .stat-number {
-    font-size: 16px;
+    font-size: 20px;
   }
 }
 
 @media (min-width: 1024px) {
-  .user-card {
-    padding: 24px;
-  }
-
-  .avatar {
-    width: 80px;
-    height: 80px;
-  }
-
-  .name {
-    font-size: 20px;
-  }
-
-  .login {
-    font-size: 18px;
-  }
-
-  .bio {
-    font-size: 16px;
-    color: rgb(236, 206, 206);
-  }
-
-  .stats-row {
-    gap: 40px;
-  }
-
   .stat-title {
     font-size: 14px;
   }
 
   .stat-number {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 

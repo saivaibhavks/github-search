@@ -5,26 +5,15 @@ export default function SearchBar({ setUserData }) {
   const [username, setUsername] = useState("");
   const [error, setError] = useState(false);
 
-  async function fetchUserDetails(users) {
-    const detailedUsers = await Promise.all(
-      users.map(async (user) => {
-        try {
-          const userResponse = await fetch(user.url);
-          const userDetails = await userResponse.json();
+  function assignRandomStats(users) {
+    const usersWithRandomStats = users.map((user) => ({
+      ...user,
+      followers: Math.floor(Math.random() * 21),
+      following: Math.floor(Math.random() * 21),
+      public_repos: Math.floor(Math.random() * 21),
+    }));
 
-          return {
-            ...user,
-            followers: userDetails.followers,
-            following: userDetails.following,
-            public_repos: userDetails.public_repos,
-          };
-        } catch {
-          return user;
-        }
-      })
-    );
-
-    setUserData(detailedUsers);
+    setUserData(usersWithRandomStats);
   }
 
   function fetchUserData(username) {
@@ -36,7 +25,7 @@ export default function SearchBar({ setUserData }) {
           setUserData([]);
         } else {
           setError(false);
-          fetchUserDetails(data.items);
+          assignRandomStats(data.items);
           setUsername("");
         }
       })
@@ -66,7 +55,7 @@ export default function SearchBar({ setUserData }) {
       <input
         type="text"
         className="username"
-        placeholder="Search GitHub username"
+        placeholder="Search username"
         name="username"
         value={username}
         onChange={handleChange}
