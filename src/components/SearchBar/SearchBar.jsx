@@ -13,7 +13,6 @@ export default function SearchBar({ setUserData }) {
       following: Math.floor(Math.random() * 21),
       public_repos: Math.floor(Math.random() * 21),
     }));
-
     setUserData(usersWithRandomStats);
   }
 
