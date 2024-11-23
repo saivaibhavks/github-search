@@ -8,6 +8,7 @@ export default function UserData({ user }) {
 
   useEffect(() => {
     if (user) {
+      setCurrentPage(1);
       setTotalPages(Math.ceil(user.length / itemsPerPage));
     }
   }, [user]);
@@ -89,25 +90,27 @@ export default function UserData({ user }) {
         </div>
       ))}
 
-      <div className="pagination-container">
-        <button
-          className="pagination-button"
-          onClick={handlePreviousPage}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <span className="pagination-info">
-          Page {currentPage} of {totalPages}
-        </span>
-        <button
-          className="pagination-button"
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
-      </div>
+      {user.length > 0 && (
+        <div className="pagination-container">
+          <button
+            className="pagination-button"
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span className="pagination-info">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            className="pagination-button"
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </section>
   );
 }

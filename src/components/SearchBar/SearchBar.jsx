@@ -4,6 +4,7 @@ import "./SearchBar.css";
 export default function SearchBar({ setUserData }) {
   const [username, setUsername] = useState("");
   const [error, setError] = useState(false);
+  const [validationError, setValidationError] = useState(false);
 
   function assignRandomStats(users) {
     const usersWithRandomStats = users.map((user) => ({
@@ -40,7 +41,12 @@ export default function SearchBar({ setUserData }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (username.trim()) {
+    if (!username.trim()) {
+      setValidationError(true);
+      setError(false);
+      setUserData([]);
+    } else {
+      setValidationError(false);
       fetchUserData(username);
     }
   }
@@ -60,6 +66,9 @@ export default function SearchBar({ setUserData }) {
         value={username}
         onChange={handleChange}
       />
+      {validationError && (
+        <span className="error">Please enter a username</span>
+      )}
       {error && <span className="error">No Records Found!</span>}
       <button className="search-btn">Search</button>
     </form>
